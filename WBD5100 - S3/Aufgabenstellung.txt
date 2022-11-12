@@ -1,0 +1,31 @@
+Im Projektordner findest Du die Projektdateien ( PHP, HTML, JS und CSS)
+
+sowie die Datenbank als .sql Datei.
+
+ 
+
+Entpacke den Ordner und lege die Dateien an die entsprechenden Orte. Projektdateien sollen in den htdocs deines lokalen Serversystems in übersichtlicher Form abgelegt werden. Die vorgegebene Datenbankdatei soll dem lokalen MySQL Server hinzugefügt werden und auf Richtigkeit und Vollständigkeit hin überprüft werden.
+ 
+
+Editiere nun die index.php Datei im Projektordner so, dass diese als Eingabeformular verwendet werden kann.
+ 
+
+ 
+
+Über dieses Formular soll der Username und das Passwort des jeweiligen Users eingegeben werden. Anschließend erfolgt der Abgleich der eingegebenen Dateien mit denen aus der Datenbank. In der Datenbankdatei ist allerdings lediglich eine Tabelle mit Userdaten hinterlegt. Editiere die Datenbank so, dass diese auch die Passwörter der User speichert, damit diese abgeglichen werden können.
+ 
+
+Erstelle nun ein PHP Script, welches die eingegebenen Login- Daten mit denen aus der Datenbank abgleicht. Bei fehlerhaft eingegebenen Login- Daten soll eine entsprechende Fehlerausgabe erfolgen. Bei erfolgreicher Eingabe der Login Daten soll der User ebenfalls eine entsprechende Meldung erhalten. Achte hierbei besonders auf die Vermeidung von SQL-Injections und die Objektorientierte Programmierung in PHP. Zudem sollte der Login nach Möglichkeit abgesichert und das Eingabeformular in PHP validiert werden.
+ 
+
+ 
+
+Nach einem erfolgreichen Login des Users soll das Script session_logger.php ausgeführt werden. Dieses generiert eine Session-ID als GUID, ermittelt die aktuelle Zeit als UNIX Timestamp und liest die User-ID aus der aktuellen Session aus. Dieses Script enthält einige Fehler. Diese Fehler sollst du finden und korrigieren. Abschließend sollen nötige Änderungen an deinen Scripten vorgenommen werden um die Funktion der session_logger.php herzustellen.
+ 
+
+Abschließend sollen die erzeugten Daten aus der session_logger.php in die session_logger Tabelle in der Datenbank geschrieben werden. Achte hierbei auch wieder auf die Objekt- orientierte Umsetzung.
+ 
+
+ 
+
+Exportiere nun deine fertige Datenbank mittels sqlPro. Lege die Exportierte Datei und alle Projektdateien in ein .zip Archiv.
