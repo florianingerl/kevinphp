@@ -1,42 +1,34 @@
+<html>
+<head>
+  <title>Validation des Login</title>
+</head>
+<body>
+
 <?php
 
+include 'src/Database.php';
+include 'src/User.php';
+$db = new Database();
 
-$servername = "localhost";
-$username = "root2";
-$password = "ABC";
-
-try {
-  $conn = new PDO("mysql:host=$servername;dbname=wbd5100s3", $username, $password);
-  // set the PDO error mode to exception
-  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  echo "Connected successfully";
-} catch(PDOException $e) {
-  echo "Connection failed: " . $e->getMessage();
-}
 
 $username = $_POST["username"];
 $password = $_POST["password"];
 
-echo "Username was " . $username . "\n";
-echo "Password was " . $password . "\n";
+echo "<p> Username was " . $username . "</p>\n";
+echo "<p>Password was " . $password . "</p>\n";
 
-$stmt = $conn->prepare("Select * from user where username = '$username'");
-$stmt->execute();
-
-// set the resulting array to associative
-$stmt->setFetchMode(PDO::FETCH_ASSOC);
-$result = $stmt->fetchAll();
+$result = $db->findUserByUsername($username);
 
 if( count($result) == 0 ){
-    echo "User " . $username . " does not exist!";
-    
+    echo "<p>User " . $username . " does not exist!</p>";
 }
 else {
-    if( $result[0]["password"] != $password ){
-        echo "Password was invalid";
+    $user = new User($result[0]);
+    if( $user->getPassword() != $password ){
+        echo "<p>Password was invalid</p>";
     }
     else {
-        echo "Login successfull!";
+        echo "<p>Login successfull!</p>";
         include 'session_logger.php';
     }
 }
@@ -45,3 +37,8 @@ else {
 
 
 ?>
+
+
+</body>
+
+</html>

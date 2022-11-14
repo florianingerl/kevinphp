@@ -2,13 +2,13 @@
 
 final class ActualTime {
 
-    protected string $time;
+    protected int $time;
 
     public function __construct() {
-        $this->time = date("h:i:sa");
+        $this->time = strtotime( date("Y-m-d h:i:sa") );
     }
 
-    public function getTimestamp() : string {
+    public function getTimestamp() : int {
 
         return $this->time;
     }

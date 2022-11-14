@@ -70,3 +70,5 @@ UNLOCK TABLES;
 alter table user add column password varchar(30);
 update user set password = 'ABC' where firstname = 'Albert';
 update user set password = '123' where firstname = 'Hermann';
+
+alter table session_logger modify column session_user varchar(50);

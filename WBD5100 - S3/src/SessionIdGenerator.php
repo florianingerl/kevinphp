@@ -17,7 +17,7 @@ class SessionIdGenerator {
 
     public function getSessionId() : string {
 
-        return self::$sessionid;
+        return $this->sessionid;
     }
 
 }

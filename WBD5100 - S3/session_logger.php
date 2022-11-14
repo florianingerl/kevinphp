@@ -8,12 +8,15 @@ require_once __DIR__ . '/src/SessionIdGenerator.php';
 require_once __DIR__ . '/src/LoggedInUser.php';
 
 
-echo "Das session_logger-Skript wird ausgeführt!";
+echo "<p>Das session_logger-Skript wird ausgeführt!</p>";
 //Session-ID generieren und in der Variable sessionid speichern
 $SessionIdGenerator = new SessionIdGenerator();
+$session_id = $SessionIdGenerator->getSessionId();
 
 //Aktuelle Zeit als UNIX- Timestamp in der Variable actual Time speichern
 $AcutalTime = new ActualTime();
 $timestamp = $AcutalTime->getTimestamp();
 
-//Aktuell angemeldeten User aus der Session auslesen
+$userid = $user->getUserId();
+
+$db->insertIntoSessionLogger($session_id, $timestamp, $userid);
