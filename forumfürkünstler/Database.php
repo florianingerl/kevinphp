@@ -39,4 +39,28 @@ class Database
             echo $sql . "<br>" . $e->getMessage();
         }
     }
+
+    public function findUserByEMail($email){
+        $stmt = $this->conn->prepare("select * from users where email = :email");
+ 
+        $stmt->bindParam(':email', $email);
+
+        $stmt->execute();
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $result = $stmt->fetchAll();
+
+        if( count($result) == 0 ){
+            return null;
+        }
+        else{
+            
+            $user = new User();
+            $user->email = $email;
+            $user->password = $result[0]["password"];
+            $user->firstname = $result[0]["firstname"];
+            $user->lastname = $result[0]["lastname"];
+            return $user;
+        }
+    }
+
 }

@@ -49,7 +49,17 @@ a {
 <li><a href="index.php" id="logo">Künstlerforum</a></li>
 <li><input type="text" id="search" name="search" placeholder="Search" ></input>  </li>
 <li><a href="search.php" class="mybutton">Search</a></li>
+<?php if(!isset( $_SESSION["loggedUser"]) ){ ?>
 <li><a href="login.php" class="mybutton">Sign in</a></li>
 <li><a href="signup.php" class="mybutton">Sign up</a> </li>
+<?php } else { ?>
+<li><a href="logout.php" class="mybutton">Logout</a></li>
+<li style="color:orange; font-size: 17px;">You are logged in as <?php
+include 'User.php';
+$user = $_SESSION["loggedUser"];
+echo $user->email ;
+?></li>
+
+<?php } ?>
 
 </ul>
