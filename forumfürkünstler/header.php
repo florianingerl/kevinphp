@@ -35,10 +35,18 @@ a {
     text-decoration: none;
 }
 
+#logo {
+    text-transform: uppercase;
+    color: orange ;
+    font-size: 25px;
+}
+
 </style>
 
 <ul id="mynavbar">
 
+<li><a href="index.php"><img src="assets/img/logo.png" height="100px"></img></a></li>
+<li><a href="index.php" id="logo">Künstlerforum</a></li>
 <li><input type="text" id="search" name="search" placeholder="Search" ></input>  </li>
 <li><a href="search.php" class="mybutton">Search</a></li>
 <li><a href="login.php" class="mybutton">Sign in</a></li>
