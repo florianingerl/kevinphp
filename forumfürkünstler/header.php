@@ -53,11 +53,14 @@ a {
 <li><a href="login.php" class="mybutton">Sign in</a></li>
 <li><a href="signup.php" class="mybutton">Sign up</a> </li>
 <?php } else { ?>
+<li><a href="postadd.php" class="mybutton">Neue Anzeige</a></li>
 <li><a href="logout.php" class="mybutton">Logout</a></li>
 <li style="color:orange; font-size: 17px;">You are logged in as <?php
-include 'User.php';
-$user = $_SESSION["loggedUser"];
-echo $user->email ;
+
+$email = $_SESSION["loggedUser"];
+$db = new Database();
+$user = $db->findUserByEMail($email); 
+echo $user->firstname . " " . $user->lastname ;
 ?></li>
 
 <?php } ?>

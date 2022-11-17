@@ -1,5 +1,8 @@
 <?php
 session_start();
+
+include 'User.php';
+include 'Database.php';
 ?>
 
 <html>

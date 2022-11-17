@@ -1,5 +1,8 @@
 <?php
 session_start();
+
+include 'User.php';
+include 'Database.php';
 ?>
 
 
@@ -15,7 +18,7 @@ session_start();
     <?php include 'header.php' ?>
 
     <?php
-    include 'User.php';
+    
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $user = new User();
         $user->firstname = $_POST["firstname"];
@@ -24,7 +27,7 @@ session_start();
 
         $user->email = $_POST["email"];
 
-        include 'Database.php';
+        
         $db = new Database();
         $db->insertUser($user);
     }

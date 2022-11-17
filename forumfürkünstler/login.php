@@ -1,5 +1,8 @@
 <?php
 session_start();
+
+include 'Database.php';
+include 'User.php';
 ?>
 
 <html>
@@ -9,30 +12,31 @@ session_start();
 <body>
     <?php 
 
-     include 'header.php'; 
+    $message = "";
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        include 'Database.php';
-        include 'User.php';
+        
 
         $db = new Database();
         $user = $db->findUserByEMail($_POST["email"]);
 
         if( $user == null ){
-            echo "<p style=\"color:red\">User with that email does not exist! </p>";
+            $message = "<p style=\"color:red\">User with that email does not exist! </p>";
         }
         else if( $user->password != $_POST["password"]) {
-            echo "<p style=\"color:red\">You entered the wrong password! </p>";
+            $message = "<p style=\"color:red\">You entered the wrong password! </p>";
         } 
         else {
-            $_SESSION["loggedUser"] = $user;
-            echo "<h1>Congratulations! You have successfully logged in! You can now offer something beautiful!</h1>";
+            $_SESSION["loggedUser"] = $user->email;
+            $message =  "<h1>Congratulations! You have successfully logged in! You can now offer something beautiful!</h1>";
         }
 
 
     }
 
-   
+    include 'header.php'; 
+
+    echo $message;
 
     if(! isset($_SESSION["loggedUser"])){ ?>
     <div style="width: 500px; margin: 14px auto;">
