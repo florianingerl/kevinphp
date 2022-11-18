@@ -2,6 +2,8 @@
 
 * {
     margin: 5px;
+    padding: 0px;
+    box-sizing: border-box;
 }
 
 #search {
@@ -26,7 +28,8 @@
 #mynavbar {
     display: flex;
     flex-direction: row;
-    
+    border-radius: 5px;
+    border: solid 1px orange;
     align-items: center;
     list-style-type: none;
 }
@@ -49,6 +52,7 @@ a {
     border-radius: 2px;
     border: solid 1px orange;
     border-bottom: none;
+    margin-bottom: 0px;
 }
 
 .meinssubmenu {
@@ -62,6 +66,7 @@ a {
     list-style-type: none;
     background-color: white;
     color:orange;
+    margin-top: 0px;
 
 }
 
