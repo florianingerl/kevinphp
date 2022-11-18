@@ -6,7 +6,7 @@ class FileUploader
 
     public function __construct()
     {
-        $this->errorMessage = null;
+        $this->errorMessage = "";
     }
 
     public function getErrorMessage(){

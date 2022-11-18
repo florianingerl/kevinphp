@@ -3,10 +3,12 @@
 class Database
 {
     private $conn;
-    private $errorMessage;
+    private string $errorMessage;
 
     public function __construct()
     {
+        $errorMessage = "";
+
         $servername = "localhost";
         $username = "root2";
         $password = "ABC";
@@ -118,8 +120,13 @@ class Database
     }
 
     public function getMaxAddId(){
-       $stmt =  $this->conn->prepare("select max(id) from adds");
-        
+       $stmt =  $this->conn->prepare("select max(id) as highestId from adds");
+       $stmt->execute(); 
+
+       $stmt->setFetchMode(PDO::FETCH_ASSOC);
+       $result = $stmt->fetchAll();
+
+       return $result[0]["highestId"];
     }
 
 }

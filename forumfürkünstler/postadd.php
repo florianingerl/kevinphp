@@ -26,9 +26,12 @@ include 'FileUploader.php';
                 $add->user = $user;
 
                 $db->insertNewAdd($add);
+                $add->id = $db->getMaxAddId();
 
-                    
+                $fu = new FileUploader();
+                $fu->uploadImageForAdd($add);    
 
+                echo "<p>Congratulations! You have successfully posted a new add!</p>";
             }
 
         ?>
