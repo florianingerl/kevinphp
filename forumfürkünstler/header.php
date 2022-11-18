@@ -41,7 +41,44 @@ a {
     font-size: 25px;
 }
 
-</style>
+.meinsmenu {
+    color: orange;
+    font-size: 20px;
+    position: relative;
+    padding: 5px;
+    border-radius: 2px;
+    border: solid 1px orange;
+    border-bottom: none;
+}
+
+.meinssubmenu {
+    display: none;
+    width: 200px;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    border: solid 1px orange;
+    border-top: none;
+    list-style-type: none;
+    background-color: white;
+    color:orange;
+
+}
+
+.meinssubmenu a {
+    padding: 5px;
+}
+
+.meinssubmenu a:hover {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.meinsmenu:hover .meinssubmenu {
+    display: flex;
+    flex-direction: column;
+}
+    </style>
 
 <ul id="mynavbar">
 
@@ -55,14 +92,16 @@ a {
 <?php } else { ?>
 <li><a href="postadd.php" class="mybutton">Neue Anzeige</a></li>
 <li><a href="logout.php" class="mybutton">Logout</a></li>
-<li style="color:orange; font-size: 17px;">You are logged in as <?php
+<li> <div style="display:flex; flex-direction: column; align-items: center;"> <div style="color:orange; font-size: 15px;">You are logged in as <?php
 
 $email = $_SESSION["loggedUser"];
 $db = new Database();
 $user = $db->findUserByEMail($email); 
 echo $user->firstname . " " . $user->lastname ;
-?></li>
+?> </div> <div class="meinsmenu">Meins<ul class="meinssubmenu"><li><a href="">Nachrichten</a> </li><li><a href="">Anzeigen</a></li> </ul></div>  </div> </li>
 
 <?php } ?>
+
+
 
 </ul>
