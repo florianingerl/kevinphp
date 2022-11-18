@@ -4,6 +4,8 @@ session_start();
 include 'Database.php';
 include 'User.php';
 include 'Add.php';
+include 'FileUploader.php';
+
 ?>
 
 <html>
@@ -25,6 +27,8 @@ include 'Add.php';
 
                 $db->insertNewAdd($add);
 
+                    
+
             }
 
         ?>
@@ -32,12 +36,15 @@ include 'Add.php';
 
 
         <div style="width:700px; margin: 6px auto">
-            <form action="postadd.php" method="post">
+            <form action="postadd.php" method="post" enctype="multipart/form-data">
                 <p>Titel:</p>
                 <input type="text" name="title" placeholder="Titel"></input>
 
                 <p>Anzeigentext:</p>
                 <textarea name="text" rows="20" cols="50"></textarea>
+
+                <p>Bild:</p>
+                <input type="file" name="fileToUpload" id="fileToUpload">
                 <p><input type="submit" value="Veröffentlichen"></input></p>
                 
             </form>

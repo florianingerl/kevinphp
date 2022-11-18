@@ -3,6 +3,7 @@
 class Database
 {
     private $conn;
+    private $errorMessage;
 
     public function __construct()
     {
@@ -78,6 +79,47 @@ class Database
         } catch (PDOException $e) {
             echo $sql . "<br>" . $e->getMessage();
         }
+    }
+
+    public function findAllAddsFromUser ($user){
+        $stmt = $this->conn->prepare("select * from adds where useremail = :email");
+ 
+        $stmt->bindParam(":email", $user->email);
+
+        $stmt->execute();
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $result = $stmt->fetchAll();
+
+        $adds = array();
+        for($i=0; $i < count($result); $i++){
+            $add = new Add();
+            $add->id = $result[$i]["id"];
+            $add->text = $result [$i]["text"];
+            $add ->title = $result[$i]["title"];             
+            $add->user = $user;
+            $adds[$i] = $add;
+        }
+        return $adds;
+
+       
+    }
+
+    public function deleteAddWithId ($id){
+        $this->errorMessage = null;
+        try {
+        $stmt = $this->conn->prepare("delete from adds where id= :id");
+        $stmt->bindParam(":id", $id);
+
+        $stmt->execute();
+        }
+        catch(PDOException $e){
+            $this->errorMessage = $e->getMessage();
+        }
+    }
+
+    public function getMaxAddId(){
+       $stmt =  $this->conn->prepare("select max(id) from adds");
+        
     }
 
 }
