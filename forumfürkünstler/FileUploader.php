@@ -51,4 +51,24 @@ class FileUploader
         $target_file = "assets/img/adds/" . $add->id . "." . $imageFileType;
         $this->uploadFileAs($target_file);
     }
+
+    public function getImageForAdd($add){
+        $fwe = "assets/img/adds/" . $add->id;
+        if( file_exists($fwe . ".png")){
+            return $fwe . ".png";
+        }
+        else if( file_exists($fwe . ".gif")){
+            return $fwe . ".gif";
+        }
+        else if( file_exists($fwe . ".jpg")){
+            return $fwe . ".jpg";
+        }
+        else if( file_exists($fwe . ".jpeg")){
+            return $fwe . ".jpeg";
+        }
+        else {
+            return "assets/img/logo.png";
+        }
+
+    }
 }

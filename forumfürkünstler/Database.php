@@ -129,4 +129,31 @@ class Database
        return $result[0]["highestId"];
     }
 
+    public function getAddById($id){
+       $stmt =  $this->conn->prepare("select * from adds where id = :id");
+       $stmt->bindParam(":id", $id );
+       $stmt->execute(); 
+
+       $stmt->setFetchMode(PDO::FETCH_ASSOC);
+       $result = $stmt->fetchAll();
+
+       $add = new Add();
+       $add->id = $id;
+       $add->title = $result[0]["title"];
+       $add->text = $result[0]["text"];
+       $add->user = $this->findUserByEMail( $result[0]["useremail"] );
+
+       return $add;
+    }
+
+    public function updateAdd($add){
+        $stmt =  $this->conn->prepare("update adds set title = :title, text=:text where id = :id ");
+       $stmt->bindParam(":id", $add->id );
+       $stmt->bindParam(":title", $add->title);
+        $stmt->bindParam(":text", $add->text);
+       $stmt->execute(); 
+
+       
+      
+    }
 }
