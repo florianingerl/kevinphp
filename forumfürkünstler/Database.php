@@ -107,7 +107,7 @@ class Database
     }
 
     public function deleteAddWithId ($id){
-        $this->errorMessage = null;
+        $this->errorMessage = "";
         try {
         $stmt = $this->conn->prepare("delete from adds where id= :id");
         $stmt->bindParam(":id", $id);
@@ -155,5 +155,25 @@ class Database
 
        
       
+    }
+
+    public function findAddsByKeyword($keyword){
+        $stmt =  $this->conn->prepare("select * from adds where title LIKE '%$keyword%' or text LIKE '%$keyword%' ");
+        $stmt->execute(); 
+
+        
+       $stmt->setFetchMode(PDO::FETCH_ASSOC);
+       $result = $stmt->fetchAll();
+
+       $adds = array();
+       for($i=0; $i < count($result); $i++){
+           $add = new Add();
+           $add->id = $result[$i]["id"];
+           $add->text = $result [$i]["text"];
+           $add ->title = $result[$i]["title"];             
+           $add->user = $this->findUserByEMail($result[$i]["useremail"]);
+           $adds[$i] = $add;
+       }
+       return $adds;
     }
 }

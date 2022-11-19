@@ -42,7 +42,7 @@ include 'FileUploader.php';
     <?php echo $add->text; ?> 
     </p>
     <p>
-        <a href="myadds.php?addIdToDelete=<?php echo $add->id; ?>" class="mybutton">Delete</a>
+        <a href="myadds.php?addIdToDelete=<?php echo $add->id; ?>" onclick="return confirm('Do you really want to delete this add?');" class="mybutton">Delete</a>
         <a href="editadd.php?addIdToEdit=<?php echo $add->id; ?>" class="mybutton">Edit</a>
     </p>
 </div>
@@ -53,6 +53,7 @@ include 'FileUploader.php';
     
 
     ?>
+
 </body>
 
 </html>

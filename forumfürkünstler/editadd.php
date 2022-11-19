@@ -43,7 +43,7 @@ include "Add.php";
             <input type="text" name="title" placeholder="Titel" value="<?php echo $add->title; ?>"></input>
 
             <p>Anzeigentext:</p>
-            <textarea name="text" rows="20" cols="50" value="<?php echo $add->text; ?>"></textarea>
+            <textarea name="text" rows="20" cols="50" ><?php echo $add->text; ?></textarea>
 
             <!--
             <p>Bild:</p>

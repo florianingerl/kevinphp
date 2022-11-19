@@ -89,8 +89,8 @@ a {
 
 <li><a href="index.php"><img src="assets/img/logo.png" height="100px"></img></a></li>
 <li><a href="index.php" id="logo">Künstlerforum</a></li>
-<li><input type="text" id="search" name="search" placeholder="Search" ></input>  </li>
-<li><a href="search.php" class="mybutton">Search</a></li>
+<li><form action="searchadd.php" method="GET"> <input type="text" id="search" name="search" placeholder="Search" ></input>  </li>
+<input type="submit" class="mybutton" value="Search"></input> </form> </li>
 <?php if(!isset( $_SESSION["loggedUser"]) ){ ?>
 <li><a href="login.php" class="mybutton">Sign in</a></li>
 <li><a href="signup.php" class="mybutton">Sign up</a> </li>
