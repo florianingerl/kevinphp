@@ -30,8 +30,9 @@ include 'FileUploader.php';
                 <?php echo $add->text; ?>
             </p>
             <p>Nachricht:</p>
-            <textarea id="message" ncols="50" nrows="4"></textarea>
+            <textarea id="message<?php echo $add->id ?>" ncols="50" nrows="4"></textarea>
             <p><button class="mybutton" onclick="sendMessage(<?php echo $add->id; ?>);">Nachricht senden!</button> </p>
+            <p id="feedback<?php echo $add->id ?>"></p>
             <!--
             <p>
                 <a href="myadds.php?addIdToDelete=<?php echo $add->id; ?>" onclick="return confirm('Do you really want to delete this add?');" class="mybutton">Delete</a>
@@ -52,12 +53,13 @@ include 'FileUploader.php';
 
     <script>
         function sendMessage(addid) {
-           
+            	
                 const xhttp = new XMLHttpRequest();
                 xhttp.onload = function() {
-                    document.getElementById("demo").innerHTML = this.responseText;
+                    document.getElementById("feedback" + addid).innerHTML = this.responseText;
                 }
-                xhttp.open("GET", "sendmessage.php?addid=" + addid , true);
+                let message = document.getElementById("message"+addid).value;
+                xhttp.open("GET", "sendmessage.php?addid=" + addid + "&message=" + message , true);
                 xhttp.send();
             
 

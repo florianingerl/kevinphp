@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Erstellungszeit: 19. Nov 2022 um 17:15
--- Server-Version: 8.0.28
--- PHP-Version: 7.4.26
+-- Generation Time: Nov 19, 2022 at 06:18 PM
+-- Server version: 8.0.28
+-- PHP Version: 7.4.26
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Datenbank: `kuenstlerforum`
+-- Database: `kuenstlerforum`
 --
 
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `adds`
+-- Table structure for table `adds`
 --
 
 DROP TABLE IF EXISTS `adds`;
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `adds` (
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Daten für Tabelle `adds`
+-- Dumping data for table `adds`
 --
 
 INSERT INTO `adds` (`id`, `title`, `text`, `useremail`) VALUES
@@ -50,7 +50,7 @@ INSERT INTO `adds` (`id`, `title`, `text`, `useremail`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `messages`
+-- Table structure for table `messages`
 --
 
 DROP TABLE IF EXISTS `messages`;
@@ -61,12 +61,19 @@ CREATE TABLE IF NOT EXISTS `messages` (
   `toemail` varchar(50) NOT NULL,
   `text` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `messages`
+--
+
+INSERT INTO `messages` (`id`, `addid`, `fromemail`, `toemail`, `text`) VALUES
+(1, 4, 'imelflorianingerl@gmail.com', 'imelflorianingerl@gmail.com', 'Hallo Flori');
 
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `users`
+-- Table structure for table `users`
 --
 
 DROP TABLE IF EXISTS `users`;
@@ -79,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Daten für Tabelle `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`email`, `firstname`, `lastname`, `password`) VALUES

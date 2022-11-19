@@ -5,6 +5,11 @@ class Database
     private $conn;
     private string $errorMessage;
 
+    public function getErrorMessage(): string
+    {
+        return $this->errorMessage;
+    }
+
     public function __construct()
     {
         $errorMessage = "";
@@ -20,7 +25,7 @@ class Database
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             //echo "<h1>The connection to the database was successfull! </h1>\n";
         } catch (PDOException $e) {
-            echo "<h1>Connection failed: " . $e->getMessage() . " </h1>\n";
+            $this->errorMessage = $e->getMessage();
         }
     }
 
@@ -43,21 +48,21 @@ class Database
         }
     }
 
-    public function findUserByEMail($email){
+    public function findUserByEMail($email)
+    {
 
         $stmt = $this->conn->prepare("select * from users where email = :email");
- 
+
         $stmt->bindParam(":email", $email);
 
         $stmt->execute();
         $stmt->setFetchMode(PDO::FETCH_ASSOC);
         $result = $stmt->fetchAll();
 
-        if( count($result) == 0 ){
+        if (count($result) == 0) {
             return null;
-        }
-        else{
-            
+        } else {
+
             $user = new User();
             $user->email = $email;
             $user->password = $result[0]["password"];
@@ -66,7 +71,8 @@ class Database
             return $user;
         }
     }
-    public function insertNewAdd($add){
+    public function insertNewAdd($add)
+    {
         try {
             $sql = "INSERT INTO adds (title, text, useremail )
   VALUES (:title, :text, :useremail)";
@@ -83,9 +89,10 @@ class Database
         }
     }
 
-    public function findAllAddsFromUser ($user){
+    public function findAllAddsFromUser($user)
+    {
         $stmt = $this->conn->prepare("select * from adds where useremail = :email");
- 
+
         $stmt->bindParam(":email", $user->email);
 
         $stmt->execute();
@@ -93,87 +100,114 @@ class Database
         $result = $stmt->fetchAll();
 
         $adds = array();
-        for($i=0; $i < count($result); $i++){
+        for ($i = 0; $i < count($result); $i++) {
             $add = new Add();
             $add->id = $result[$i]["id"];
-            $add->text = $result [$i]["text"];
-            $add ->title = $result[$i]["title"];             
+            $add->text = $result[$i]["text"];
+            $add->title = $result[$i]["title"];
             $add->user = $user;
             $adds[$i] = $add;
         }
         return $adds;
-
-       
     }
 
-    public function deleteAddWithId ($id){
+    public function deleteAddWithId($id)
+    {
         $this->errorMessage = "";
         try {
-        $stmt = $this->conn->prepare("delete from adds where id= :id");
-        $stmt->bindParam(":id", $id);
+            $stmt = $this->conn->prepare("delete from adds where id= :id");
+            $stmt->bindParam(":id", $id);
 
-        $stmt->execute();
-        }
-        catch(PDOException $e){
+            $stmt->execute();
+        } catch (PDOException $e) {
             $this->errorMessage = $e->getMessage();
         }
     }
 
-    public function getMaxAddId(){
-       $stmt =  $this->conn->prepare("select max(id) as highestId from adds");
-       $stmt->execute(); 
+    public function getMaxAddId()
+    {
+        $stmt =  $this->conn->prepare("select max(id) as highestId from adds");
+        $stmt->execute();
 
-       $stmt->setFetchMode(PDO::FETCH_ASSOC);
-       $result = $stmt->fetchAll();
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $result = $stmt->fetchAll();
 
-       return $result[0]["highestId"];
+        return $result[0]["highestId"];
     }
 
-    public function getAddById($id){
-       $stmt =  $this->conn->prepare("select * from adds where id = :id");
-       $stmt->bindParam(":id", $id );
-       $stmt->execute(); 
+    public function getAddById($id)
+    {
+        $stmt =  $this->conn->prepare("select * from adds where id = :id");
+        $stmt->bindParam(":id", $id);
+        $stmt->execute();
 
-       $stmt->setFetchMode(PDO::FETCH_ASSOC);
-       $result = $stmt->fetchAll();
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $result = $stmt->fetchAll();
 
-       $add = new Add();
-       $add->id = $id;
-       $add->title = $result[0]["title"];
-       $add->text = $result[0]["text"];
-       $add->user = $this->findUserByEMail( $result[0]["useremail"] );
+        $add = new Add();
+        $add->id = $id;
+        $add->title = $result[0]["title"];
+        $add->text = $result[0]["text"];
+        $add->user = $this->findUserByEMail($result[0]["useremail"]);
 
-       return $add;
+        return $add;
     }
 
-    public function updateAdd($add){
+    public function updateAdd($add)
+    {
         $stmt =  $this->conn->prepare("update adds set title = :title, text=:text where id = :id ");
-       $stmt->bindParam(":id", $add->id );
-       $stmt->bindParam(":title", $add->title);
+        $stmt->bindParam(":id", $add->id);
+        $stmt->bindParam(":title", $add->title);
         $stmt->bindParam(":text", $add->text);
-       $stmt->execute(); 
-
-       
-      
+        $stmt->execute();
     }
 
-    public function findAddsByKeyword($keyword){
+    public function findAddsByKeyword($keyword)
+    {
         $stmt =  $this->conn->prepare("select * from adds where title LIKE '%$keyword%' or text LIKE '%$keyword%' ");
-        $stmt->execute(); 
+        $stmt->execute();
 
-        
-       $stmt->setFetchMode(PDO::FETCH_ASSOC);
-       $result = $stmt->fetchAll();
 
-       $adds = array();
-       for($i=0; $i < count($result); $i++){
-           $add = new Add();
-           $add->id = $result[$i]["id"];
-           $add->text = $result [$i]["text"];
-           $add ->title = $result[$i]["title"];             
-           $add->user = $this->findUserByEMail($result[$i]["useremail"]);
-           $adds[$i] = $add;
-       }
-       return $adds;
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $result = $stmt->fetchAll();
+
+        $adds = array();
+        for ($i = 0; $i < count($result); $i++) {
+            $add = new Add();
+            $add->id = $result[$i]["id"];
+            $add->text = $result[$i]["text"];
+            $add->title = $result[$i]["title"];
+            $add->user = $this->findUserByEMail($result[$i]["useremail"]);
+            $adds[$i] = $add;
+        }
+        return $adds;
+    }
+
+    public function findUserWhoPostedTheAdd($addId)
+    {
+        $stmt =  $this->conn->prepare("select * from adds where id=:id");
+        $stmt->bindParam(":id", $addId);
+        $stmt->execute();
+
+
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $result = $stmt->fetchAll();
+
+        return $this->findUserByEMail($result[0]["useremail"]);
+    }
+
+    public function insertMessage($message)
+    {
+        $this->errorMessage = "";
+        try {
+            $stmt =  $this->conn->prepare("insert into messages (text,fromemail,toemail,addid) values (:text, :fromemail, :toemail,:addid)");
+            $stmt->bindParam(":addid", $message->addId);
+            $stmt->bindParam(":toemail", $message->toEmail);
+            $stmt->bindParam(":fromemail", $message->fromEmail);
+            $stmt->bindParam(":text", $message->text);
+            $stmt->execute();
+        } catch (PDOException $e) {
+            $this->errorMessage = $e->getMessage();
+        }
     }
 }
