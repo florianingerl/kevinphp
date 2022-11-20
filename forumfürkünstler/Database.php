@@ -214,8 +214,8 @@ class Database
     public function getMessagesToOrFromUser($user)
     {
         $stmt =  $this->conn->prepare("select * from messages where toemail = :toemail or fromemail = :fromemail ");
-        $stmt->bindParam(":toemail", $user->email );
-        $stmt->bindParam(":fromemail", $user->email );
+        $stmt->bindParam(":toemail", $user->email);
+        $stmt->bindParam(":fromemail", $user->email);
         $stmt->execute();
 
 
@@ -229,10 +229,67 @@ class Database
             $message->addId = $result[$i]["addid"];
             $message->fromEmail = $result[$i]["fromemail"];
             $message->toEmail = $result[$i]["toemail"];
-            $message->text =$result[$i]["text"];
+            $message->text = $result[$i]["text"];
 
             $messages[$i] = $message;
         }
         return $messages;
+    }
+
+    public function getMessageById($messageId)
+    {
+        $stmt =  $this->conn->prepare("select * from messages where id = :id");
+        $stmt->bindParam(":id", $messageId);
+        $stmt->execute();
+
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $result = $stmt->fetchAll();
+
+        $m = new Message();
+        $m->id = $messageId;
+        $m->addId = $result[0]["addid"];
+        $m->text = $result[0]["text"];
+        $m->fromEmail = $result[0]["fromemail"];
+        $m->toEmail = $result[0]["toemail"];
+        $m->preId = $result[0]["premessageid"];
+        $m->postId = $result[0]["postmessageid"];
+
+
+        return $m;
+    }
+
+    public function insertNewReplyMessage($m)
+    {
+        $this->errorMessage = "";
+
+        try {
+            $stmt =  $this->conn->prepare("insert into messages (text,fromemail, toemail, premessageid, addid) values (:text, :fromemail, :toemail,  :premessageid, :addid)");
+            $stmt->bindParam(":text", $m->text);
+            $stmt->bindParam(":fromemail", $m->fromEmail);
+            $stmt->bindParam(":toemail", $m->toEmail);
+            $stmt->bindParam(":premessageid", $m->preId);
+            $stmt->bindParam(":addid", $m->addId);
+            $stmt->execute();
+
+            $m->id = $this->getMaxMessageId();
+
+            $stmt =  $this->conn->prepare("update messages set postmessageid = :postmessageid where id = :id");
+            $stmt->bindParam(":id", $m->preId);
+            $stmt->bindParam(":postmessageid", $m->id);
+            $stmt->execute();
+        } catch (PDOException $e) {
+            $this->errorMessage = $e->getMessage();
+        }
+    }
+
+    public function getMaxMessageId()
+    {
+        $stmt =  $this->conn->prepare("select max(id) as highestId from messages");
+        $stmt->execute();
+
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $result = $stmt->fetchAll();
+
+        return $result[0]["highestId"];
     }
 }
