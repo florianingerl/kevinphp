@@ -1,0 +1,27 @@
+[
+{"type":"header","version":"5.1.1","comment":"Export to JSON plugin for PHPMyAdmin"},
+{"type":"database","name":"kuenstlerforum"},
+{"type":"table","name":"adds","database":"kuenstlerforum","data":
+[
+{"id":"4","title":"Bassspielen kann Jeder Depp","text":"Das ist doch so leicht, dass es jeder kann!\r\n\r\nMan kann natürlich kann!","useremail":"imelflorianingerl@gmail.com"},
+{"id":"6","title":"Gitarre ist leicht","text":"Gitarre ist leicht\r\nGitarre ist leicht\r\nGitarre ist leicht","useremail":"imelflorianingerl@gmail.com"},
+{"id":"7","title":"Schlagzeug ist leicht","text":"Schlagzeug ist leicht\r\nSchlagzeug ist leicht\r\nSchlagzeug ist leicht\r\nSchlagzeug ist leicht\r\nSchlagzeug ist leicht","useremail":"imelflorianingerl@gmail.com"},
+{"id":"8","title":"Klavier","text":"Klavier ist einfach.\r\n\r\n\r\nKlavier ist einfach.\r\n\r\n\r\nKlavier ist einfach.\r\n\r\nKlavier ist einfach.\r\n\r\nKlavier ist einfach.\r\n\r\nKlavier ist einfach.\r\n","useremail":"imelflorianingerl@gmail.com"},
+{"id":"9","title":"Deine Gitarre günstig","text":"Zum Preis 50 Euro","useremail":"imelflorianingerl@gmail.com"},
+{"id":"10","title":"Klavier","text":"Ich kann gut spielen!","useremail":"H-Ingerl@gmail.com"}
+]
+}
+,{"type":"table","name":"messages","database":"kuenstlerforum","data":
+[
+{"id":"1","addid":"4","fromemail":"imelflorianingerl@gmail.com","toemail":"imelflorianingerl@gmail.com","text":"Hallo Flori","premessageid":null},
+{"id":"2","addid":"10","fromemail":"H-Ingerl@gmail.com","toemail":"H-Ingerl@gmail.com","text":"Hallo Hermann","premessageid":null},
+{"id":"3","addid":"10","fromemail":"H-Ingerl@gmail.com","toemail":"H-Ingerl@gmail.com","text":"Kannst du das wirklich?","premessageid":null}
+]
+}
+,{"type":"table","name":"users","database":"kuenstlerforum","data":
+[
+{"email":"H-Ingerl@gmail.com","firstname":"Hermman","lastname":"Ingerl","password":"$2y$10$fGbykL1B1Qeb83Na5EgNnuBhW4WthHkbLTmriYe.ZWfMXNLMLm6E6"},
+{"email":"imelflorianingerl@gmail.com","firstname":"Florian","lastname":"Ingerl","password":"ABC"}
+]
+}
+]

@@ -23,7 +23,7 @@ include 'Database.php';
         $user = new User();
         $user->firstname = $_POST["firstname"];
         $user->lastname = $_POST["lastname"];
-        $user->password = $_POST["password"];
+        $user->password = password_hash($_POST["password"], PASSWORD_DEFAULT );
 
         $user->email = $_POST["email"];
 

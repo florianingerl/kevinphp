@@ -1,0 +1,35 @@
+"id","title","text","useremail"
+"4","Bassspielen kann Jeder Depp","Das ist doch so leicht, dass es jeder kann!
+
+Man kann natürlich kann!","imelflorianingerl@gmail.com"
+"6","Gitarre ist leicht","Gitarre ist leicht
+Gitarre ist leicht
+Gitarre ist leicht","imelflorianingerl@gmail.com"
+"7","Schlagzeug ist leicht","Schlagzeug ist leicht
+Schlagzeug ist leicht
+Schlagzeug ist leicht
+Schlagzeug ist leicht
+Schlagzeug ist leicht","imelflorianingerl@gmail.com"
+"8","Klavier","Klavier ist einfach.
+
+
+Klavier ist einfach.
+
+
+Klavier ist einfach.
+
+Klavier ist einfach.
+
+Klavier ist einfach.
+
+Klavier ist einfach.
+","imelflorianingerl@gmail.com"
+"9","Deine Gitarre günstig","Zum Preis 50 Euro","imelflorianingerl@gmail.com"
+"10","Klavier","Ich kann gut spielen!","H-Ingerl@gmail.com"
+"id","addid","fromemail","toemail","text","premessageid"
+"1","4","imelflorianingerl@gmail.com","imelflorianingerl@gmail.com","Hallo Flori",NULL
+"2","10","H-Ingerl@gmail.com","H-Ingerl@gmail.com","Hallo Hermann",NULL
+"3","10","H-Ingerl@gmail.com","H-Ingerl@gmail.com","Kannst du das wirklich?",NULL
+"email","firstname","lastname","password"
+"H-Ingerl@gmail.com","Hermman","Ingerl","$2y$10$fGbykL1B1Qeb83Na5EgNnuBhW4WthHkbLTmriYe.ZWfMXNLMLm6E6"
+"imelflorianingerl@gmail.com","Florian","Ingerl","ABC"
