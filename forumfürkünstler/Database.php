@@ -210,4 +210,29 @@ class Database
             $this->errorMessage = $e->getMessage();
         }
     }
+
+    public function getMessagesToOrFromUser($user)
+    {
+        $stmt =  $this->conn->prepare("select * from messages where toemail = :toemail or fromemail = :fromemail ");
+        $stmt->bindParam(":toemail", $user->email );
+        $stmt->bindParam(":fromemail", $user->email );
+        $stmt->execute();
+
+
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $result = $stmt->fetchAll();
+
+        $messages = array();
+        for ($i = 0; $i < count($result); $i++) {
+            $message = new Message();
+            $message->id = $result[$i]["id"];
+            $message->addId = $result[$i]["addid"];
+            $message->fromEmail = $result[$i]["fromemail"];
+            $message->toEmail = $result[$i]["toemail"];
+            $message->text =$result[$i]["text"];
+
+            $messages[$i] = $message;
+        }
+        return $messages;
+    }
 }

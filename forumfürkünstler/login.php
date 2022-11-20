@@ -23,7 +23,7 @@ include 'User.php';
         if( $user == null ){
             $message = "<p style=\"color:red\">User with that email does not exist! </p>";
         }
-        else if( $user->password != $_POST["password"]) {
+        else if( ! password_verify($_POST["password"], $user->password) ) {
             $message = "<p style=\"color:red\">You entered the wrong password! </p>";
         } 
         else {
