@@ -32,6 +32,7 @@
     border: solid 1px orange;
     align-items: center;
     list-style-type: none;
+    
 }
 
 a {
@@ -92,10 +93,10 @@ a {
 <li><form action="searchadd.php" method="GET"> <input type="text" id="search" name="search" placeholder="Search" ></input>  </li>
 <input type="submit" class="mybutton" value="Search"></input> </form> </li>
 <?php if(!isset( $_SESSION["loggedUser"]) ){ ?>
-<li><a href="login.php" class="mybutton">Sign in</a></li>
-<li><a href="signup.php" class="mybutton">Sign up</a> </li>
+<li><a href="login.php" class="mybutton">Sign&nbsp;in</a></li>
+<li><a href="signup.php" class="mybutton">Sign&nbsp;up</a> </li>
 <?php } else { ?>
-<li><a href="postadd.php" class="mybutton">Neue Anzeige</a></li>
+<li><a href="postadd.php" class="mybutton">Neue&nbsp;Anzeige</a></li>
 <li><a href="logout.php" class="mybutton">Logout</a></li>
 <li> <div style="display:flex; flex-direction: column; align-items: center;"> <div style="color:orange; font-size: 15px;">You are logged in as <?php
 

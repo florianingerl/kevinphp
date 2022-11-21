@@ -71,4 +71,24 @@ class FileUploader
         }
 
     }
+
+    public function getImageForUser($user){
+        $fwe = "assets/img/users/" . $user->email;
+        if( file_exists($fwe . ".png")){
+            return $fwe . ".png";
+        }
+        else if( file_exists($fwe . ".gif")){
+            return $fwe . ".gif";
+        }
+        else if( file_exists($fwe . ".jpg")){
+            return $fwe . ".jpg";
+        }
+        else if( file_exists($fwe . ".jpeg")){
+            return $fwe . ".jpeg";
+        }
+        else {
+            return "assets/img/users/kopf.png";
+        }
+
+    }
 }
