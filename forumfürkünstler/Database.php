@@ -292,4 +292,27 @@ class Database
 
         return $result[0]["highestId"];
     }
+
+    public function findAllFirstMessagesToOrFromUser($user){
+        $stmt =  $this->conn->prepare("select * from messages where (toemail = :toemail or fromemail = :toemail ) and premessageid IS NULL ");
+        $stmt->bindParam(":toemail", $user->email);
+        $stmt->execute();
+
+
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $result = $stmt->fetchAll();
+
+        $messages = array();
+        for ($i = 0; $i < count($result); $i++) {
+            $message = new Message();
+            $message->id = $result[$i]["id"];
+            $message->addId = $result[$i]["addid"];
+            $message->fromEmail = $result[$i]["fromemail"];
+            $message->toEmail = $result[$i]["toemail"];
+            $message->text = $result[$i]["text"];
+
+            $messages[$i] = $message;
+        }
+        return $messages;
+    }
 }

@@ -104,7 +104,7 @@ $email = $_SESSION["loggedUser"];
 $db = new Database();
 $user = $db->findUserByEMail($email); 
 echo $user->firstname . " " . $user->lastname ;
-?> </div> <div class="meinsmenu">Meins<ul class="meinssubmenu"><li><a href="mymessages.php">Nachrichten</a> </li><li><a href="myadds.php">Anzeigen</a></li><li><a href="myprofile.php">Profil</a></li> </ul></div>  </div> </li>
+?> </div> <div class="meinsmenu">Meins<ul class="meinssubmenu"><li><a href="mymessages2.php">Nachrichten</a> </li><li><a href="myadds.php">Anzeigen</a></li><li><a href="myprofile.php">Profil</a></li> </ul></div>  </div> </li>
 
 <?php } ?>
 
